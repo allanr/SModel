@@ -207,7 +207,7 @@ public class MancalaView extends JFrame {
 
         g.setColor(new Color(225,225,25));
         g.setFont(new Font("Verdana", 0, 24));
-        drawCenter("Waiting player", 404, 180, g);   
+        drawCenter("Waiting for player", 404, 180, g);   
         drawCenter("to connect...", 404, 210, g);   	
     		
 	}	
@@ -254,14 +254,20 @@ public class MancalaView extends JFrame {
             g.setFont(new Font("Verdana", 0, 16));
         	g.drawImage(images[MENU], 280, 80, null);
             g.setColor(new Color(255,255,255));
-            drawCenter("Player", 404, 120, g);
-            drawCenter("wins the game", 404, 180, g);
-
+            // check if game is drawn
+            if(mancalaGame.getPlayer(0).countSeeds() == mancalaGame.getPlayer(1).countSeeds()){
+            	drawCenter("Game ended", 404, 120, g);
+	            drawCenter("with draw", 404, 180, g);
+            } else {
+	            drawCenter("Player", 404, 120, g);
+	            drawCenter("wins the game", 404, 180, g);
+	            g.setFont(new Font("Verdana", 0, 24));
+	            drawCenter(mancalaGame.checkWin().getName(), 404, 150, g);
+	            g.setFont(new Font("Verdana", 0, 16));
+            }
             drawCenter("Click anywhere with", 404, 260, g);
             drawCenter("mouse to continue", 404, 280, g);
 
-            g.setFont(new Font("Verdana", 0, 24));
-            drawCenter(mancalaGame.checkWin().getName(), 404, 150, g);
         }
 	}
 	

@@ -147,6 +147,7 @@ public class MancalaController {
         try {
         	mancalaView.setView(MancalaView.Views.WAITING);
         	mancalaView.repaint();
+            mancalaView.showMessage("Waiting for player to connect!");
             gameClient = gameServer.accept();
             is = new DataInputStream(gameClient.getInputStream());
             ps = new PrintStream(gameClient.getOutputStream());
