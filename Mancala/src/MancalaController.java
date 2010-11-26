@@ -31,6 +31,7 @@ public class MancalaController {
 	static boolean server = false;
 	static boolean client = false;
 	static Timer timer;
+	static MancalaHistory mancalaHistory = null;
 
 	// two different game logic, where in HOTSEAT mode both players pits can be played and in server
 	// mode one player pit is accessed
@@ -528,9 +529,9 @@ public class MancalaController {
 										condition = 1;
 									}
 									// check if last seed lands in empty pit, take another players pit seeds
-									if(seeds + i < 6 && mancalaGame.getPlayerWithTurn().getSeedsFromPit(seeds + i) == 0){
+									if((seeds + i) % 14 < 6 && mancalaGame.getPlayerWithTurn().getSeedsFromPit(seeds + i) == 0){
 										condition = 2;
-										other_seeds = mancalaGame.getPlayerWithTurn().getOtherPlayerPit(5 - seeds + i).countSeeds();
+										other_seeds = mancalaGame.getPlayerWithTurn().getOtherPlayerPit(5 - (seeds + i) % 14).countSeeds();
 									}
 									// taavetile lõpp
 									if(!mancalaGame.getPlayerWithTurn().playPit(i)){
@@ -578,9 +579,9 @@ public class MancalaController {
 										condition = 1;
 									}
 									// check if last seed lands in empty pit, take another players pit seeds
-									if(seeds + i < 6 && mancalaGame.getPlayerWithTurn().getSeedsFromPit(seeds + i) == 0){
+									if((seeds + i) % 14 < 6 && mancalaGame.getPlayerWithTurn().getSeedsFromPit(seeds + i) == 0){
 										condition = 2;
-										other_seeds = mancalaGame.getPlayerWithTurn().getOtherPlayerPit(5 - seeds + i).countSeeds();
+										other_seeds = mancalaGame.getPlayerWithTurn().getOtherPlayerPit(5 - (seeds + i) % 14).countSeeds();
 									}
 									// taavetile lõpp
 									if(!mancalaGame.getPlayerWithTurn().playPit(i)){

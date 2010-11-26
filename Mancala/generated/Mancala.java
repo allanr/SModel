@@ -37,6 +37,11 @@ public class Mancala
       Seed seed3 = null;
       Seed seed2 = null;
       Seed seed4 = null;
+      Seed seed5 = null;
+      Seed seed6 = null;
+      Seed seed7 = null;
+      Seed seed9 = null;
+      Seed seed8 = null;
       Iterator fujaba__IterPlayer1ToPit = null;
       Pit pit = null;
       Iterator fujaba__IterPlayer2ToPit = null;
@@ -245,6 +250,21 @@ public class Mancala
                   // create object seed4
                   seed4 = new Seed ( );
 
+                  // create object seed5
+                  seed5 = new Seed ( );
+
+                  // create object seed6
+                  seed6 = new Seed ( );
+
+                  // create object seed7
+                  seed7 = new Seed ( );
+
+                  // create object seed9
+                  seed9 = new Seed ( );
+
+                  // create object seed8
+                  seed8 = new Seed ( );
+
                   // create link has seeds from pit to seed1
                   pit.addToSeed (seed1);
 
@@ -256,6 +276,21 @@ public class Mancala
 
                   // create link has seeds from pit to seed4
                   pit.addToSeed (seed4);
+
+                  // create link has seeds from pit to seed5
+                  pit.addToSeed (seed5);
+
+                  // create link has seeds from pit to seed6
+                  pit.addToSeed (seed6);
+
+                  // create link has seeds from pit to seed7
+                  pit.addToSeed (seed7);
+
+                  // create link has seeds from pit to seed8
+                  pit.addToSeed (seed8);
+
+                  // create link has seeds from pit to seed9
+                  pit.addToSeed (seed9);
 
                   fujaba__Success = true;
                }

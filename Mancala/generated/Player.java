@@ -669,6 +669,7 @@ public class Player
       boolean fujaba__Success = false;
       int whichPit = 0;
       int checkPit = 0;
+      int fullTurn = 0;
       Object _TmpObject = null;
       Player next = null;
       int seeds = 0;
@@ -698,6 +699,8 @@ public class Player
          whichPit = number;
          // collabStat call
          checkPit = number;
+         // collabStat call
+         fullTurn = 0;
          fujaba__Success = true;
       }
       catch ( JavaSDMException fujaba__InternalException )
@@ -840,54 +843,31 @@ public class Player
                      fujaba__Success = false;
                   }
 
-                  // // put every seed into next pit
-                  // story pattern storypatternwiththis
-                  try 
+                  while( true )
                   {
-                     fujaba__Success = false; 
-
-                     // iterate to-many link has pits from this to nextPit
-                     fujaba__Success = false;
-                     fujaba__IterThisToNextPit = this.iteratorOfPit ();
-
-                     while ( fujaba__IterThisToNextPit.hasNext () )
+                     // // put every seed into next pit
+                     // story pattern storypatternwiththis
+                     try 
                      {
-                        try
+                        fujaba__Success = false; 
+
+                        // iterate to-many link has pits from this to nextPit
+                        fujaba__Success = false;
+                        fujaba__IterThisToNextPit = this.iteratorOfPit ();
+
+                        while ( fujaba__IterThisToNextPit.hasNext () )
                         {
-                           nextPit = (Pit) fujaba__IterThisToNextPit.next ();
-
-                           // check object nextPit is really bound
-                           JavaSDM.ensure ( nextPit != null );
-                           // collabStat call
-                           whichPit = whichPit - 1;
-                           if ( seeds > 0 && whichPit < 0 )
+                           try
                            {
-                              // // generate new relation with pit and seed
-                              // story pattern storypatternwiththis
-                              try 
+                              nextPit = (Pit) fujaba__IterThisToNextPit.next ();
+
+                              // check object nextPit is really bound
+                              JavaSDM.ensure ( nextPit != null );
+                              // collabStat call
+                              whichPit = whichPit - 1;
+                              if ( seeds > 0 && whichPit < 0 )
                               {
-                                 fujaba__Success = false; 
-
-                                 // check object nextPit is really bound
-                                 JavaSDM.ensure ( nextPit != null );
-                                 // create object seed
-                                 seed = new Seed ( );
-
-                                 // create link has seeds from nextPit to seed
-                                 nextPit.addToSeed (seed);
-
-                                 // collabStat call
-                                 seeds = seeds - 1;
-                                 fujaba__Success = true;
-                              }
-                              catch ( JavaSDMException fujaba__InternalException )
-                              {
-                                 fujaba__Success = false;
-                              }
-
-                              if ( seeds == 0 && nextPit.countSeeds() == 1 && this.getOtherPlayerPit(5-(checkPit+checkSeeds)).countSeeds() > 0 )
-                              {
-                                 // // if the last seed landed into pit with 0 seeds, take other players seeds from opposite possition
+                                 // // generate new relation with pit and seed
                                  // story pattern storypatternwiththis
                                  try 
                                  {
@@ -895,53 +875,14 @@ public class Player
 
                                     // check object nextPit is really bound
                                     JavaSDM.ensure ( nextPit != null );
-                                    // iterate to-many link has seeds from nextPit to seed
-                                    fujaba__Success = false;
-                                    fujaba__IterNextPitToSeed = nextPit.iteratorOfSeed ();
+                                    // create object seed
+                                    seed = new Seed ( );
 
-                                    while ( !(fujaba__Success) && fujaba__IterNextPitToSeed.hasNext () )
-                                    {
-                                       try
-                                       {
-                                          seed = (Seed) fujaba__IterNextPitToSeed.next ();
+                                    // create link has seeds from nextPit to seed
+                                    nextPit.addToSeed (seed);
 
-                                          // check object seed is really bound
-                                          JavaSDM.ensure ( seed != null );
-
-                                          fujaba__Success = true;
-                                       }
-                                       catch ( JavaSDMException fujaba__InternalException )
-                                       {
-                                          fujaba__Success = false;
-                                       }
-                                    }
-                                    JavaSDM.ensure (fujaba__Success);
-                                    // iterate to-many link has store from this to store
-                                    fujaba__Success = false;
-                                    fujaba__IterThisToStore = this.iteratorOfStore ();
-
-                                    while ( !(fujaba__Success) && fujaba__IterThisToStore.hasNext () )
-                                    {
-                                       try
-                                       {
-                                          store = (Store) fujaba__IterThisToStore.next ();
-
-                                          // check object store is really bound
-                                          JavaSDM.ensure ( store != null );
-
-                                          fujaba__Success = true;
-                                       }
-                                       catch ( JavaSDMException fujaba__InternalException )
-                                       {
-                                          fujaba__Success = false;
-                                       }
-                                    }
-                                    JavaSDM.ensure (fujaba__Success);
-                                    // destroy link has seeds from nextPit to seed
-                                    nextPit.removeFromSeed (seed);
-                                    // create link has seeds from store to seed
-                                    store.addToSeed (seed);
-
+                                    // collabStat call
+                                    seeds = seeds - 1;
                                     fujaba__Success = true;
                                  }
                                  catch ( JavaSDMException fujaba__InternalException )
@@ -949,211 +890,161 @@ public class Player
                                     fujaba__Success = false;
                                  }
 
-                                 // // select other player pit
-                                 // story pattern storypatternwiththis
-                                 try 
+                                 if ( seeds == 0 && nextPit.countSeeds() == 1 && this.getOtherPlayerPit(5-(checkPit+checkSeeds)%14).countSeeds() > 0 )
                                  {
-                                    fujaba__Success = false; 
-
-                                    // create object otherplayerpit
-                                    otherplayerpit = this.getOtherPlayerPit(5-(checkPit+checkSeeds));
-
-                                    fujaba__Success = true;
-                                 }
-                                 catch ( JavaSDMException fujaba__InternalException )
-                                 {
-                                    fujaba__Success = false;
-                                 }
-
-                                 // // delete seeds from other player pit and put it to the correct player store
-                                 // story pattern storypatternwiththis
-                                 try 
-                                 {
-                                    fujaba__Success = false; 
-
-                                    // check object otherplayerpit is really bound
-                                    JavaSDM.ensure ( otherplayerpit != null );
-                                    // iterate to-many link has seeds from otherplayerpit to seed
-                                    fujaba__Success = false;
-                                    fujaba__IterOtherplayerpitToSeed = otherplayerpit.iteratorOfSeed ();
-
-                                    while ( fujaba__IterOtherplayerpitToSeed.hasNext () )
+                                    // // if the last seed landed into pit with 0 seeds, take other players seeds from opposite possition
+                                    // story pattern storypatternwiththis
+                                    try 
                                     {
-                                       try
+                                       fujaba__Success = false; 
+
+                                       // check object nextPit is really bound
+                                       JavaSDM.ensure ( nextPit != null );
+                                       // iterate to-many link has seeds from nextPit to seed
+                                       fujaba__Success = false;
+                                       fujaba__IterNextPitToSeed = nextPit.iteratorOfSeed ();
+
+                                       while ( !(fujaba__Success) && fujaba__IterNextPitToSeed.hasNext () )
                                        {
-                                          seed = (Seed) fujaba__IterOtherplayerpitToSeed.next ();
-
-                                          // check object seed is really bound
-                                          JavaSDM.ensure ( seed != null );
-                                          // iterate to-many link has store from this to store
-                                          fujaba__Success = false;
-                                          fujaba__IterThisToStore = this.iteratorOfStore ();
-
-                                          while ( fujaba__IterThisToStore.hasNext () )
+                                          try
                                           {
-                                             try
-                                             {
-                                                store = (Store) fujaba__IterThisToStore.next ();
+                                             seed = (Seed) fujaba__IterNextPitToSeed.next ();
 
-                                                // check object store is really bound
-                                                JavaSDM.ensure ( store != null );
-                                                // destroy link has seeds from otherplayerpit to seed
-                                                otherplayerpit.removeFromSeed (seed);
-                                                // create link has seeds from store to seed
-                                                store.addToSeed (seed);
+                                             // check object seed is really bound
+                                             JavaSDM.ensure ( seed != null );
 
-
-                                                fujaba__Success = true;
-                                             }
-                                             catch ( JavaSDMException fujaba__InternalException )
-                                             {
-                                                fujaba__Success = false;
-                                             }
+                                             fujaba__Success = true;
                                           }
-                                          JavaSDM.ensure (fujaba__Success);
-
-                                          fujaba__Success = true;
+                                          catch ( JavaSDMException fujaba__InternalException )
+                                          {
+                                             fujaba__Success = false;
+                                          }
                                        }
-                                       catch ( JavaSDMException fujaba__InternalException )
+                                       JavaSDM.ensure (fujaba__Success);
+                                       // iterate to-many link has store from this to store
+                                       fujaba__Success = false;
+                                       fujaba__IterThisToStore = this.iteratorOfStore ();
+
+                                       while ( !(fujaba__Success) && fujaba__IterThisToStore.hasNext () )
                                        {
-                                          fujaba__Success = false;
-                                       }
-                                    }
-                                    JavaSDM.ensure (fujaba__Success);
-                                    fujaba__Success = true;
-                                 }
-                                 catch ( JavaSDMException fujaba__InternalException )
-                                 {
-                                    fujaba__Success = false;
-                                 }
+                                          try
+                                          {
+                                             store = (Store) fujaba__IterThisToStore.next ();
 
+                                             // check object store is really bound
+                                             JavaSDM.ensure ( store != null );
+
+                                             fujaba__Success = true;
+                                          }
+                                          catch ( JavaSDMException fujaba__InternalException )
+                                          {
+                                             fujaba__Success = false;
+                                          }
+                                       }
+                                       JavaSDM.ensure (fujaba__Success);
+                                       // destroy link has seeds from nextPit to seed
+                                       nextPit.removeFromSeed (seed);
+                                       // create link has seeds from store to seed
+                                       store.addToSeed (seed);
+
+                                       fujaba__Success = true;
+                                    }
+                                    catch ( JavaSDMException fujaba__InternalException )
+                                    {
+                                       fujaba__Success = false;
+                                    }
+
+                                    // // select other player pit
+                                    // story pattern storypatternwiththis
+                                    try 
+                                    {
+                                       fujaba__Success = false; 
+
+                                       // create object otherplayerpit
+                                       otherplayerpit = this.getOtherPlayerPit(5-(checkPit+checkSeeds)%14);
+
+                                       fujaba__Success = true;
+                                    }
+                                    catch ( JavaSDMException fujaba__InternalException )
+                                    {
+                                       fujaba__Success = false;
+                                    }
+
+                                    // // delete seeds from other player pit and put it to the correct player store
+                                    // story pattern storypatternwiththis
+                                    try 
+                                    {
+                                       fujaba__Success = false; 
+
+                                       // check object otherplayerpit is really bound
+                                       JavaSDM.ensure ( otherplayerpit != null );
+                                       // iterate to-many link has seeds from otherplayerpit to seed
+                                       fujaba__Success = false;
+                                       fujaba__IterOtherplayerpitToSeed = otherplayerpit.iteratorOfSeed ();
+
+                                       while ( fujaba__IterOtherplayerpitToSeed.hasNext () )
+                                       {
+                                          try
+                                          {
+                                             seed = (Seed) fujaba__IterOtherplayerpitToSeed.next ();
+
+                                             // check object seed is really bound
+                                             JavaSDM.ensure ( seed != null );
+                                             // iterate to-many link has store from this to store
+                                             fujaba__Success = false;
+                                             fujaba__IterThisToStore = this.iteratorOfStore ();
+
+                                             while ( fujaba__IterThisToStore.hasNext () )
+                                             {
+                                                try
+                                                {
+                                                   store = (Store) fujaba__IterThisToStore.next ();
+
+                                                   // check object store is really bound
+                                                   JavaSDM.ensure ( store != null );
+                                                   // destroy link has seeds from otherplayerpit to seed
+                                                   otherplayerpit.removeFromSeed (seed);
+                                                   // create link has seeds from store to seed
+                                                   store.addToSeed (seed);
+
+
+                                                   fujaba__Success = true;
+                                                }
+                                                catch ( JavaSDMException fujaba__InternalException )
+                                                {
+                                                   fujaba__Success = false;
+                                                }
+                                             }
+                                             JavaSDM.ensure (fujaba__Success);
+
+                                             fujaba__Success = true;
+                                          }
+                                          catch ( JavaSDMException fujaba__InternalException )
+                                          {
+                                             fujaba__Success = false;
+                                          }
+                                       }
+                                       JavaSDM.ensure (fujaba__Success);
+                                       fujaba__Success = true;
+                                    }
+                                    catch ( JavaSDMException fujaba__InternalException )
+                                    {
+                                       fujaba__Success = false;
+                                    }
+
+
+                                 }
 
                               }
 
+                              fujaba__Success = true;
                            }
-
-                           fujaba__Success = true;
+                           catch ( JavaSDMException fujaba__InternalException )
+                           {
+                              fujaba__Success = false;
+                           }
                         }
-                        catch ( JavaSDMException fujaba__InternalException )
-                        {
-                           fujaba__Success = false;
-                        }
-                     }
-                     JavaSDM.ensure (fujaba__Success);
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
-
-                  // // delete the seed from taken pit (+1 hack)
-                  // story pattern storypatternwiththis
-                  try 
-                  {
-                     fujaba__Success = false; 
-
-                     // check object pit is really bound
-                     JavaSDM.ensure ( pit != null );
-                     // iterate to-many link has seeds from pit to seed
-                     fujaba__Success = false;
-                     fujaba__IterPitToSeed = pit.iteratorOfSeed ();
-
-                     while ( !(fujaba__Success) && fujaba__IterPitToSeed.hasNext () )
-                     {
-                        try
-                        {
-                           seed = (Seed) fujaba__IterPitToSeed.next ();
-
-                           // check object seed is really bound
-                           JavaSDM.ensure ( seed != null );
-
-                           fujaba__Success = true;
-                        }
-                        catch ( JavaSDMException fujaba__InternalException )
-                        {
-                           fujaba__Success = false;
-                        }
-                     }
-                     JavaSDM.ensure (fujaba__Success);
-                     // destroy link has seeds from pit to seed
-                     pit.removeFromSeed (seed);
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
-
-                  if ( !( seeds > 0 ) )
-                  {
-                     return true;
-
-                  }
-                  // // go through store and put seed into store
-                  // story pattern storypatternwiththis
-                  try 
-                  {
-                     fujaba__Success = false; 
-
-                     // iterate to-many link has store from this to store
-                     fujaba__Success = false;
-                     fujaba__IterThisToStore = this.iteratorOfStore ();
-
-                     while ( !(fujaba__Success) && fujaba__IterThisToStore.hasNext () )
-                     {
-                        try
-                        {
-                           store = (Store) fujaba__IterThisToStore.next ();
-
-                           // check object store is really bound
-                           JavaSDM.ensure ( store != null );
-
-                           fujaba__Success = true;
-                        }
-                        catch ( JavaSDMException fujaba__InternalException )
-                        {
-                           fujaba__Success = false;
-                        }
-                     }
-                     JavaSDM.ensure (fujaba__Success);
-                     // create object seed
-                     seed = new Seed ( );
-
-                     // create link has seeds from store to seed
-                     store.addToSeed (seed);
-
-                     // collabStat call
-                     seeds = seeds - 1;
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
-
-                  if ( !( seeds > 0 ) )
-                  {
-                     // // if the last seed landed into store, then this player can play again
-                     // story pattern storypatternwiththis
-                     try 
-                     {
-                        fujaba__Success = false; 
-
-                        // search to-one link next player from this to next
-                        next = this.getPlayer ();
-
-                        // check object next is really bound
-                        JavaSDM.ensure ( next != null );
-
-                        // check isomorphic binding between objects this and next
-                        JavaSDM.ensure ( !this.equals (next) );
-
-
-                        // assign attribute next
-                        next.set_turn (false);
-                        // collabStat call
-                        _turn = true;
+                        JavaSDM.ensure (fujaba__Success);
                         fujaba__Success = true;
                      }
                      catch ( JavaSDMException fujaba__InternalException )
@@ -1161,166 +1052,176 @@ public class Player
                         fujaba__Success = false;
                      }
 
-                     return true;
-
-                  }
-                  // // select next player for getting next player pits
-                  // story pattern storypatternwiththis
-                  try 
-                  {
-                     fujaba__Success = false; 
-
-                     // search to-one link next player from this to nextPlayer
-                     nextPlayer = this.getPlayer ();
-
-                     // check object nextPlayer is really bound
-                     JavaSDM.ensure ( nextPlayer != null );
-
-                     // check isomorphic binding between objects this and nextPlayer
-                     JavaSDM.ensure ( !this.equals (nextPlayer) );
-
-
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
-
-                  // // go through next player pits
-                  // story pattern storypatternwiththis
-                  try 
-                  {
-                     fujaba__Success = false; 
-
-                     // check object nextPlayer is really bound
-                     JavaSDM.ensure ( nextPlayer != null );
-                     // iterate to-many link has pits from nextPlayer to pit
-                     fujaba__Success = false;
-                     fujaba__IterNextPlayerToPit = nextPlayer.iteratorOfPit ();
-
-                     while ( fujaba__IterNextPlayerToPit.hasNext () )
+                     if ( fullTurn == 0 )
                      {
-                        try
+                        // // delete the seed from taken pit (+1 hack)
+                        // story pattern storypatternwiththis
+                        try 
                         {
-                           pit = (Pit) fujaba__IterNextPlayerToPit.next ();
+                           fujaba__Success = false; 
 
                            // check object pit is really bound
                            JavaSDM.ensure ( pit != null );
-                           if ( seeds > 0 )
+                           // iterate to-many link has seeds from pit to seed
+                           fujaba__Success = false;
+                           fujaba__IterPitToSeed = pit.iteratorOfSeed ();
+
+                           while ( !(fujaba__Success) && fujaba__IterPitToSeed.hasNext () )
                            {
-                              // // if there are seeds put them into next player's pit
-                              // story pattern storypatternwiththis
-                              try 
+                              try
                               {
-                                 fujaba__Success = false; 
+                                 seed = (Seed) fujaba__IterPitToSeed.next ();
 
-                                 // check object pit is really bound
-                                 JavaSDM.ensure ( pit != null );
-                                 // create object seed
-                                 seed = new Seed ( );
+                                 // check object seed is really bound
+                                 JavaSDM.ensure ( seed != null );
 
-                                 // create link has seeds from pit to seed
-                                 pit.addToSeed (seed);
-
-                                 // collabStat call
-                                 seeds = seeds - 1;
                                  fujaba__Success = true;
                               }
                               catch ( JavaSDMException fujaba__InternalException )
                               {
                                  fujaba__Success = false;
                               }
-
-
                            }
-
+                           JavaSDM.ensure (fujaba__Success);
+                           // destroy link has seeds from pit to seed
+                           pit.removeFromSeed (seed);
                            fujaba__Success = true;
                         }
                         catch ( JavaSDMException fujaba__InternalException )
                         {
                            fujaba__Success = false;
                         }
+
+
                      }
-                     JavaSDM.ensure (fujaba__Success);
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
 
-                  if ( !( seeds > 0 ) )
-                  {
-                     return true;
 
-                  }
-                  // // if pits are over from next player then go to the next player store and put seed there
-                  // story pattern storypatternwiththis
-                  try 
-                  {
-                     fujaba__Success = false; 
-
-                     // check object nextPlayer is really bound
-                     JavaSDM.ensure ( nextPlayer != null );
-                     // iterate to-many link has store from nextPlayer to store
-                     fujaba__Success = false;
-                     fujaba__IterNextPlayerToStore = nextPlayer.iteratorOfStore ();
-
-                     while ( !(fujaba__Success) && fujaba__IterNextPlayerToStore.hasNext () )
-                     {
-                        try
-                        {
-                           store = (Store) fujaba__IterNextPlayerToStore.next ();
-
-                           // check object store is really bound
-                           JavaSDM.ensure ( store != null );
-
-                           fujaba__Success = true;
-                        }
-                        catch ( JavaSDMException fujaba__InternalException )
-                        {
-                           fujaba__Success = false;
-                        }
-                     }
-                     JavaSDM.ensure (fujaba__Success);
-                     // create object seed
-                     seed = new Seed ( );
-
-                     // create link has seeds from store to seed
-                     store.addToSeed (seed);
-
-                     // collabStat call
-                     seeds = seeds - 1;
-                     fujaba__Success = true;
-                  }
-                  catch ( JavaSDMException fujaba__InternalException )
-                  {
-                     fujaba__Success = false;
-                  }
-
-                  if ( seeds > 0 )
-                  {
-                     // // and same round for the player who just played (go through his pits and put remaining seeds into his pits)
+                  	// loop termination check 
+                  	if ( !( seeds > 0 ) )
+                  	{
+                  		break;
+                  	}
+	
+                     // // go through store and put seed into store
                      // story pattern storypatternwiththis
                      try 
                      {
                         fujaba__Success = false; 
 
-                        // iterate to-many link has pits from this to pit
+                        // iterate to-many link has store from this to store
                         fujaba__Success = false;
-                        fujaba__IterThisToPit = this.iteratorOfPit ();
+                        fujaba__IterThisToStore = this.iteratorOfStore ();
 
-                        while ( fujaba__IterThisToPit.hasNext () )
+                        while ( !(fujaba__Success) && fujaba__IterThisToStore.hasNext () )
                         {
                            try
                            {
-                              pit = (Pit) fujaba__IterThisToPit.next ();
+                              store = (Store) fujaba__IterThisToStore.next ();
+
+                              // check object store is really bound
+                              JavaSDM.ensure ( store != null );
+
+                              fujaba__Success = true;
+                           }
+                           catch ( JavaSDMException fujaba__InternalException )
+                           {
+                              fujaba__Success = false;
+                           }
+                        }
+                        JavaSDM.ensure (fujaba__Success);
+                        // create object seed
+                        seed = new Seed ( );
+
+                        // create link has seeds from store to seed
+                        store.addToSeed (seed);
+
+                        // collabStat call
+                        seeds = seeds - 1;
+                        fujaba__Success = true;
+                     }
+                     catch ( JavaSDMException fujaba__InternalException )
+                     {
+                        fujaba__Success = false;
+                     }
+
+                     if ( !( seeds > 0 ) )
+                     {
+                        // // if the last seed landed into store, then this player can play again
+                        // story pattern storypatternwiththis
+                        try 
+                        {
+                           fujaba__Success = false; 
+
+                           // search to-one link next player from this to next
+                           next = this.getPlayer ();
+
+                           // check object next is really bound
+                           JavaSDM.ensure ( next != null );
+
+                           // check isomorphic binding between objects this and next
+                           JavaSDM.ensure ( !this.equals (next) );
+
+
+                           // assign attribute next
+                           next.set_turn (false);
+                           // collabStat call
+                           _turn = true;
+                           fujaba__Success = true;
+                        }
+                        catch ( JavaSDMException fujaba__InternalException )
+                        {
+                           fujaba__Success = false;
+                        }
+
+                        return true;
+
+                     }
+                     // // select next player for getting next player pits
+                     // story pattern storypatternwiththis
+                     try 
+                     {
+                        fujaba__Success = false; 
+
+                        // search to-one link next player from this to nextPlayer
+                        nextPlayer = this.getPlayer ();
+
+                        // check object nextPlayer is really bound
+                        JavaSDM.ensure ( nextPlayer != null );
+
+                        // check isomorphic binding between objects this and nextPlayer
+                        JavaSDM.ensure ( !this.equals (nextPlayer) );
+
+
+                        fujaba__Success = true;
+                     }
+                     catch ( JavaSDMException fujaba__InternalException )
+                     {
+                        fujaba__Success = false;
+                     }
+
+                     // // go through next player pits
+                     // story pattern storypatternwiththis
+                     try 
+                     {
+                        fujaba__Success = false; 
+
+                        // check object nextPlayer is really bound
+                        JavaSDM.ensure ( nextPlayer != null );
+                        // iterate to-many link has pits from nextPlayer to pit
+                        fujaba__Success = false;
+                        fujaba__IterNextPlayerToPit = nextPlayer.iteratorOfPit ();
+
+                        while ( fujaba__IterNextPlayerToPit.hasNext () )
+                        {
+                           try
+                           {
+                              pit = (Pit) fujaba__IterNextPlayerToPit.next ();
 
                               // check object pit is really bound
                               JavaSDM.ensure ( pit != null );
                               if ( seeds > 0 )
                               {
+                                 // // if there are seeds put them into next player's pit
                                  // story pattern storypatternwiththis
                                  try 
                                  {
@@ -1361,6 +1262,62 @@ public class Player
                         fujaba__Success = false;
                      }
 
+                     if ( !( seeds > 0 ) )
+                     {
+                        return true;
+
+                     }
+                     // // if pits are over from next player then go to the next player store and put seed there
+                     // story pattern storypatternwiththis
+                     try 
+                     {
+                        fujaba__Success = false; 
+
+                        // check object nextPlayer is really bound
+                        JavaSDM.ensure ( nextPlayer != null );
+                        // iterate to-many link has store from nextPlayer to store
+                        fujaba__Success = false;
+                        fujaba__IterNextPlayerToStore = nextPlayer.iteratorOfStore ();
+
+                        while ( !(fujaba__Success) && fujaba__IterNextPlayerToStore.hasNext () )
+                        {
+                           try
+                           {
+                              store = (Store) fujaba__IterNextPlayerToStore.next ();
+
+                              // check object store is really bound
+                              JavaSDM.ensure ( store != null );
+
+                              fujaba__Success = true;
+                           }
+                           catch ( JavaSDMException fujaba__InternalException )
+                           {
+                              fujaba__Success = false;
+                           }
+                        }
+                        JavaSDM.ensure (fujaba__Success);
+                        // create object seed
+                        seed = new Seed ( );
+
+                        // create link has seeds from store to seed
+                        store.addToSeed (seed);
+
+                        // collabStat call
+                        seeds = seeds - 1;
+                        // collabStat call
+                        fullTurn = 1;
+                        fujaba__Success = true;
+                     }
+                     catch ( JavaSDMException fujaba__InternalException )
+                     {
+                        fujaba__Success = false;
+                     }
+
+                     if ( !( seeds > 0 ) )
+                     {
+                        return true;
+
+                     }
 
                   }
                   return true;
