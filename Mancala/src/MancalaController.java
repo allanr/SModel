@@ -50,7 +50,9 @@ public class MancalaController {
 	}
 
 	void EndGame(int player_won, int player1_seeds, int player2_seeds ){
-		System.out.println("Player " + player_won + " wins game. P1 " + player1_seeds + " P2 " + player2_seeds);
+		
+		
+		//System.out.println("Player " + player_won + " wins game. P1 " + player1_seeds + " P2 " + player2_seeds);
 	}
 
 	private int userstoryCounter = 0;
@@ -122,7 +124,14 @@ public class MancalaController {
 		System.out.println("It is player " + whos_turn + " turn");*/
 	}
 
-
+	private String[][] GetHistory(){
+		String s[][] = {
+			{"1", "Player 1", "32", "Player 2", "52", "Player 2 won"},
+			{"1", "Player 1", "32", "Player 2", "32", "Draw"}
+			};
+		return s;
+	}
+	
 	// TAAVETI FUNKTSIOONID LÕPP
 
 	// MINU FUNKTSIOONID, ET ÜHTIKS TAAVETI ETTEANTUD KRITEERIUMITE JÄRGi
@@ -485,9 +494,7 @@ public class MancalaController {
 					mancalaView.setHomePlayer(1);
 					startGame();	//taavetile
 				} else if(selection == 3){
-					String[][] history = {{"1", "Player 1", "32", "Player 2", "52", "Player 2 won"},
-					{"1", "Player 1", "32", "Player 2", "32", "Draw"}
-					};
+					String[][] history = GetHistory();
 					// check if we already have generated JFrame, if not create it
 					if(mancalaHistory == null){
 						mancalaHistory = new MancalaHistory(history);
