@@ -484,6 +484,19 @@ public class MancalaController {
 					connectWithServer();
 					mancalaView.setHomePlayer(1);
 					startGame();	//taavetile
+				} else if(selection == 3){
+					String[][] history = {{"1", "Player 1", "32", "Player 2", "52", "Player 2 won"},
+					{"1", "Player 1", "32", "Player 2", "32", "Draw"}
+					};
+					// check if we already have generated JFrame, if not create it
+					if(mancalaHistory == null){
+						mancalaHistory = new MancalaHistory(history);
+					} else {
+						// if we have already generated JFrame, just update its content
+						//TODO: write setter function for this
+						mancalaHistory = new MancalaHistory(history);
+						mancalaHistory.setVisible(true);
+					}
 				} else if(selection == 4){
 					System.exit(0);
 				}
