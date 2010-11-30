@@ -50,7 +50,7 @@ public class MancalaController {
 	}
 
 	void EndGame(int player_won, int player1_seeds, int player2_seeds ){
-		
+		m_log.WriteWinningCondition(player_won,player1_seeds,player2_seeds);
 		MancalaGamesResultsLog.Add(player_won, player1_seeds, player2_seeds);
 		//System.out.println("Player " + player_won + " wins game. P1 " + player1_seeds + " P2 " + player2_seeds);
 	}

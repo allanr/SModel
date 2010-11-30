@@ -62,6 +62,13 @@ public class MancalaLog {
 	// get's the log file name that's the class is assoctiated with
 	public String GetLogFile(){return LogFileName;}
 
+	private String getSeedsName(int seeds){
+		switch(seeds){
+		case 1: return "seed";
+		default: return "seeds";
+		}
+	}
+	
 	// seeds in pits and store string
 	private String getPitsAndStore(int player, int pits[], int store){
 		final String s_pit = "PIT";
@@ -85,8 +92,23 @@ public class MancalaLog {
 		s+= "\tPlayer 2 seeds :\r\n\t\t";
 		s+= getPitsAndStore(-1,player2_pits, player2_store)+".\r\n";
 		
-		s+= "\r\n\tIt's Player " + whos_turn + " turn.\r\n";
+		// writes whose turn, if not winning condition
+		boolean player1_pits_allnull = true;
+		boolean player2_pits_allnull = true;
 		
+		for(int i=0; i<6; i++)
+			if(player1_pits[i]!=0){
+				player1_pits_allnull = false;
+				break;
+			}
+		for(int i=0; i<6; i++)
+			if(player2_pits[i]!=0){
+				player2_pits_allnull = false;
+				break;
+			}
+		
+		if(!player1_pits_allnull&&!player2_pits_allnull)
+			s+= "\r\n\tIt's Player " + whos_turn + " turn.\r\n";
 		return s;
 	}
 	
@@ -124,24 +146,51 @@ public class MancalaLog {
 		Write(s+"\r\n");
 	}
 
+	// calculates pits, if turnaround has occured
+	private int adjPit(int pit){
+		if(pit>6)pit-=14;
+		else if(pit<1)pit+=14;
+		return pit;
+	}
+	
 	public void WriteAction(
 			int whos_turn, 
 			int pit_num, 
 			int seeds,
 			int condition_code, int number_of_captured){
 		String s = "#Action:";
-		s+= "\tPlayer " + whos_turn + " sows " + seeds + " seeds from pit ";
+		s+= "\tPlayer " + whos_turn + " sows " + seeds + " "+
+			getSeedsName(seeds)+" from pit ";
 		s+= pit_num + ".\r\n";
 		if(condition_code==1){
 			s+="\t\tAs the last seed landed in store, player " + whos_turn +
 			 " gets additional move.\r\n";
-		}else if(condition_code==2){
-			s+="\t\tAs the last seed landed to empty pit "+(pit_num+seeds)+
+		}else if(condition_code==2&&number_of_captured>0){
+			s+="\t\tAs the last seed landed to empty pit "+adjPit(pit_num+seeds)+
 			",\r\n\t\tplayer " + whos_turn +
-			 " can capture " + number_of_captured + " seeds from other "+
-			 "player's pit " + (7-(pit_num+seeds))+".\r\n";
+			 " can capture " + number_of_captured + " "+
+			 	getSeedsName(number_of_captured)+" from other "+
+			 "player's pit " + adjPit(7-(pit_num+seeds))+".\r\n";
 		}
 		Write(s+"\r\n");
+	}
+
+	public void WriteWinningCondition(
+			int player_won, int player1_seeds, int player2_seeds ){
+		
+		switch(player_won){
+		case 0: Write("\tGame ended with draw (both players got 24 seeds).\r\n");
+				return;
+		case 1: Write("\tPlayer 1 won the game. ("+
+					player1_seeds+"seeds against "+
+					player2_seeds +")\r\n");
+				return;
+		case 2:
+				Write("\tPlayer 2 won the game. ("+
+						player2_seeds+"seeds against "+
+						player1_seeds +")\r\n");
+				return;
+		}
 	}
 	
 }
