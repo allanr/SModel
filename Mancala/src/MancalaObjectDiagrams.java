@@ -13,7 +13,7 @@ import java.nio.CharBuffer;
 public class MancalaObjectDiagrams {
 
 	// directory for output file
-	final private String DiagramsDirectory = "diagrams\\";
+	final private String DiagramsDirectory = "diagrams/";
 	
 	private String diaRead;
 	private String procWrite;

@@ -7,7 +7,7 @@ import java.nio.CharBuffer;
 
 public class MancalaGamesResultsLog {
 
-	private static final String GamesResultsDirectory = "results\\";
+	private static final String GamesResultsDirectory = "results/";
 	private static final String GamesResultsFile = "results.txt";
 	private static final int MaxCountHistoryRead = 30;
 	private static final int RowCount = 6;

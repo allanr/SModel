@@ -12,7 +12,7 @@ import java.io.IOException;
  * **/
 public class MancalaLog {
 
-	final private String LogDirectory = "log\\";
+	final private String LogDirectory = "log/";
 	
 	/*
 	 * Writes a string to file
