@@ -51,7 +51,7 @@ public class MancalaController {
 
 	void EndGame(int player_won, int player1_seeds, int player2_seeds ){
 		
-		
+		MancalaGamesResultsLog.Add(player_won, player1_seeds, player2_seeds);
 		//System.out.println("Player " + player_won + " wins game. P1 " + player1_seeds + " P2 " + player2_seeds);
 	}
 
@@ -125,11 +125,12 @@ public class MancalaController {
 	}
 
 	private String[][] GetHistory(){
+		/*
 		String s[][] = {
 			{"1", "Player 1", "32", "Player 2", "52", "Player 2 won"},
 			{"1", "Player 1", "32", "Player 2", "32", "Draw"}
-			};
-		return s;
+			};*/
+		return MancalaGamesResultsLog.ReadHistory();
 	}
 	
 	// TAAVETI FUNKTSIOONID LÕPP
