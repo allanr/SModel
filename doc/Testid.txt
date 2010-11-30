@@ -1,0 +1,167 @@
+Test #1
+Title: Player1 plays From Pit1
+Conditions: 
+Every pit has 4 seeds, pits are empty. Player1 is ready to make the opening move From Pit1.
+PI [Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+PII[Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 5 seeds][Pit 3 = 5 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+PII[Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+Tested: Tested!
+
+Test #2
+Title: Player2 plays From Pit6
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 5 seeds][Pit 3 = 5 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+PII[Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+Expected result:
+PI [Pit 1 = 1 seeds][Pit 2 = 6 seeds][Pit 3 = 6 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+PII[Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 0 seeds][Store S = 1 seeds]
+Tested: Tested!
+
+Test #3
+Title: Player1 plays From Pit2
+Conditions: 
+Gametable 
+PI [Pit 1 = 1 seeds][Pit 2 = 6 seeds][Pit 3 = 6 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 4 seeds][Store S = 0 seeds]
+PII[Pit 1 = 4 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 0 seeds][Store S = 1 seeds]
+Expected result:
+PI [Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 5 seeds][Store S = 1 seeds]
+PII[Pit 1 = 5 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 0 seeds][Store S = 1 seeds]
+Tested: Tested!
+
+Test #4
+Title: Player2 plays From Pit1 and captures extra stone from Player1's Pit1
+Conditions: 
+Gametable 
+PI [Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 5 seeds][Store S = 1 seeds]
+PII[Pit 1 = 5 seeds][Pit 2 = 4 seeds][Pit 3 = 4 seeds][Pit 4 = 4 seeds][Pit 5 = 4 seeds][Pit 6 = 0 seeds][Store S = 1 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 5 seeds][Store S = 1 seeds]
+PII[Pit 1 = 0 seeds][Pit 2 = 5 seeds][Pit 3 = 5 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 0 seeds][Store S = 3 seeds]
+Tested: Tested!
+
+Test #5
+Title: Player1 plays From Pit3
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 5 seeds][Store S = 1 seeds]
+PII[Pit 1 = 0 seeds][Pit 2 = 5 seeds][Pit 3 = 5 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 0 seeds][Store S = 3 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 2 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 6 seeds][Pit 3 = 6 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 0 seeds][Store S = 3 seeds]
+Tested: Tested!
+
+Test #6
+Title: Player2 plays From Pit2
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 2 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 6 seeds][Pit 3 = 6 seeds][Pit 4 = 5 seeds][Pit 5 = 5 seeds][Pit 6 = 0 seeds][Store S = 3 seeds]
+Expected result:
+PI [Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 2 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 1 seeds][Store S = 4 seeds]
+Tested: Tested!
+
+Test #7
+Title: Player1 plays From Pit1 and captures stons from Player2's Pit5.
+Conditions: 
+Gametable 
+PI [Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 2 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 6 seeds][Pit 6 = 1 seeds][Store S = 4 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 1 seeds][Store S = 4 seeds]
+Tested: Tested!
+
+Test #8
+Title: Player2 plays From Pit6 and gets extra turn.
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 1 seeds][Store S = 4 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 0 seeds][Store S = 5 seeds]
+Tested: Tested!
+
+Test #9
+Title: Player2 plays From Pit1 and gets extra stones from Player1's Pit5.
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 7 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 1 seeds][Store S = 4 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 0 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 0 seeds][Store S = 13 seeds]
+Tested: Tested!
+
+Test #10
+Title: Player1 plays From Pit4.
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 7 seeds][Pit 5 = 0 seeds][Pit 6 = 6 seeds][Store S = 9 seeds]
+PII[Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 7 seeds][Pit 4 = 6 seeds][Pit 5 = 0 seeds][Pit 6 = 0 seeds][Store S = 13 seeds]
+Expected result:
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 0 seeds][Pit 5 = 1 seeds][Pit 6 = 7 seeds][Store S = 10 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 8 seeds][Pit 4 = 7 seeds][Pit 5 = 0 seeds][Pit 6 = 0 seeds][Store S = 13 seeds]
+Tested: Tested!
+
+Test #11
+Title: Player2 plays From Pit3.
+Conditions: 
+Gametable 
+PI [Pit 1 = 0 seeds][Pit 2 = 0 seeds][Pit 3 = 0 seeds][Pit 4 = 0 seeds][Pit 5 = 1 seeds][Pit 6 = 7 seeds][Store S = 10 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 8 seeds][Pit 4 = 7 seeds][Pit 5 = 0 seeds][Pit 6 = 0 seeds][Store S = 13 seeds]
+Expected result:
+PI [Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 1 seeds][Pit 4 = 1 seeds][Pit 5 = 1 seeds][Pit 6 = 7 seeds][Store S = 10 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 0 seeds][Pit 4 = 8 seeds][Pit 5 = 1 seeds][Pit 6 = 1 seeds][Store S = 14 seeds]
+Tested: Tested!
+
+Test #12
+Title: Player1 plays From Pit6.
+Conditions: 
+Gametable 
+PI [Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 1 seeds][Pit 4 = 1 seeds][Pit 5 = 1 seeds][Pit 6 = 7 seeds][Store S = 10 seeds]
+PII[Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 0 seeds][Pit 4 = 8 seeds][Pit 5 = 1 seeds][Pit 6 = 1 seeds][Store S = 14 seeds]
+Expected result:
+PI [Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 1 seeds][Pit 4 = 1 seeds][Pit 5 = 1 seeds][Pit 6 = 0 seeds][Store S = 11 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 9 seeds][Pit 5 = 2 seeds][Pit 6 = 2 seeds][Store S = 14 seeds]
+Tested: Tested!
+
+Test #13
+Title: Player2 plays From Pit4.
+Conditions: 
+Gametable 
+PI [Pit 1 = 1 seeds][Pit 2 = 1 seeds][Pit 3 = 1 seeds][Pit 4 = 1 seeds][Pit 5 = 1 seeds][Pit 6 = 0 seeds][Store S = 11 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 9 seeds][Pit 5 = 2 seeds][Pit 6 = 2 seeds][Store S = 14 seeds]
+Expected result:
+PI [Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 2 seeds][Pit 4 = 2 seeds][Pit 5 = 2 seeds][Pit 6 = 1 seeds][Store S = 11 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 0 seeds][Pit 5 = 3 seeds][Pit 6 = 3 seeds][Store S = 15 seeds]
+Tested: Tested!
+
+Test #14
+Title: Player1 plays From Pit6, (gets extra turn).
+Conditions: 
+Gametable 
+PI [Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 2 seeds][Pit 4 = 2 seeds][Pit 5 = 2 seeds][Pit 6 = 1 seeds][Store S = 11 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 0 seeds][Pit 5 = 3 seeds][Pit 6 = 3 seeds][Store S = 15 seeds]
+Expected result:
+PI [Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 2 seeds][Pit 4 = 2 seeds][Pit 5 = 2 seeds][Pit 6 = 0 seeds][Store S = 12 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 0 seeds][Pit 5 = 3 seeds][Pit 6 = 3 seeds][Store S = 15 seeds]
+Tested: Tested!
+
+Test #15
+Title: Player1 plays From Pit5, (gets extra turn).
+Conditions: 
+Gametable 
+PI [Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 2 seeds][Pit 4 = 2 seeds][Pit 5 = 2 seeds][Pit 6 = 0 seeds][Store S = 12 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 0 seeds][Pit 5 = 3 seeds][Pit 6 = 3 seeds][Store S = 15 seeds]
+Expected result:
+PI [Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 2 seeds][Pit 4 = 2 seeds][Pit 5 = 0 seeds][Pit 6 = 1 seeds][Store S = 13 seeds]
+PII[Pit 1 = 2 seeds][Pit 2 = 2 seeds][Pit 3 = 1 seeds][Pit 4 = 0 seeds][Pit 5 = 3 seeds][Pit 6 = 3 seeds][Store S = 15 seeds]
+Tested: Tested!
+
+
