@@ -2,10 +2,11 @@
 STARTING UP
 
 1.
-Download Mancala/Mancala.jar and Mancala/pic/ folder with png images
+Download Mancala/Mancala.zip (contains Mancala.jar and pic/ folder with png images)
 
 2.
-Copy the Mancala.jar and pic/ folder with png images on your hard drive in the same folder (etc C:/Mancala/)
+Unzip Mancala.zip and copy the unzipped Mancala.jar and pic/ folder with png images 
+ on your hard drive in some folder (etc C:/Mancala/)
 
 3.
 You will need Java to run this software (1.6SE is compatible)
